@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KATATU FOREX ACADEMY</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Outfit,sans-serif}
+body{background:#070709;color:#fff}
+nav{display:flex;justify-content:space-between;padding:20px;border-bottom:1px solid #222}
+.logo{font-weight:800}.logo span{color:#f5c518}
+.btn-gold{background:#f5c518;color:#000;border:none;padding:10px 20px;border-radius:30px;font-weight:700;cursor:pointer}
+.hero{padding:50px 6%}.hero h1{font-size:44px}.hero h1 span{color:#f5c518}.hero p{color:#888;margin:15px 0;max-width:400px}
+.cards{display:flex;gap:15px;flex-wrap:wrap;margin-top:20px}
+.card{background:#141417;border:1px solid #222;padding:20px;border-radius:16px;width:300px}
+.card.vip{border-color:#f5c518}
+.price{font-size:24px;margin:10px 0;color:#f5c518}
+.dashboard{padding:20px 6%;border-top:1px solid #222;margin-top:30px}
+.progress-bar{width:200px;height:6px;background:#222;border-radius:10px;margin-top:6px}.progress-bar div{height:100%;background:#f5c518}
+video{width:100%;max-width:500px;border-radius:12px;margin:10px 0}
+.lesson{padding:10px;background:#222;margin:5px 0;border-radius:10px;cursor:pointer}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;z-index:99}
+.modal.hidden{display:none}
+.otp-glass-card{width:360px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:28px;padding:25px;text-align:center;backdrop-filter:blur(25px)}
+.otp-boxes{display:flex;gap:10px;justify-content:center;margin:20px 0}
+.otp{width:55px;height:55px;background:#000;border:1px solid #333;border-radius:14px;color:#fff;font-size:20px;text-align:center}
+.resend{font-size:11px;color:#666}.resend span{color:#f5c518}
+.btn-verify{width:100%;background:#1a1a1a;border:1px solid #333;color:#fff;padding:12px;border-radius:30px;cursor:pointer}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<nav><div class="logo">KATATU<span>FOREX</span></div><button class="btn-gold" onclick="document.getElementById('otp').classList.remove('hidden')">Login</button></nav>
+<div class="hero">
+<h1>Trade Like a <span>Pro</span></h1>
+<p>Malawi's #1 Academy. Learn Forex from zero to FTMO. MWK 50k Standard, MWK 150k VIP.</p>
+<button class="btn-gold" onclick="document.getElementById('otp').classList.remove('hidden')">Start - MWK 50K</button>
+<div class="cards">
+<div class="card"><h3>Standard</h3><div class="price">MWK 50,000</div><p>✓ Videos (No Download)<br>✓ Library<br>✓ Chat Room<br>✓ Progress</p></div>
+<div class="card vip"><h3>VIP</h3><div class="price">MWK 150,000</div><p>✓ All Standard<br>✓ 1-on-1 Mentorship<br>✓ Signals<br>✓ FTMO Help</p></div>
+</div>
+</div>
+
+<div class="dashboard" id="dash">
+<h2>Student Dashboard</h2>
+<div style="display:flex;gap:12px;align-items:center;margin:15px 0">
+<img id="pic" src="https://i.pravatar.cc/80" style="width:60px;height:60px;border-radius:50%;border:2px solid #f5c518">
+<div><h3 id="name">Hope Mwanga <button onclick="let n=prompt('New name:');if(n)document.getElementById('name').innerHTML=n">✎</button></h3><p>Expires: <span id="count">30d 00:00:00</span></p><div class="progress-bar"><div id="fill" style="width:35%"></div></div><small>35% Done</small><br><input type="file" id="file" style="margin-top:6px"></div>
+</div>
+<h4>Course Video - Protected (Cannot Download)</h4>
+<video controls controlsList="nodownload" oncontextmenu="return false" poster="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3"><source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"></video>
+<div class="lesson" onclick="document.getElementById('fill').style.width='60%'">1. What is Forex? - Click to mark complete</div>
+<div class="lesson">2. MT5 Setup</div>
+<div class="lesson">3. Risk Management</div>
+</div>
+
+<div id="otp" class="modal hidden">
+<div class="otp-glass-card">
+<div id="s1"><div style="font-size:24px">🔑</div><h2>Verify OTP</h2><p style="color:#888;font-size:12px">Enter 4-digit code - Like your video</p><div class="otp-boxes"><input class="otp" maxlength="1"><input class="otp" maxlength="1"><input class="otp" maxlength="1"><input class="otp" maxlength="1"></div><div class="resend">Didn't receive? <span id="timer">Resend 00:34</span></div><button class="btn-verify" id="btnV">Verifying Code...</button></div>
+<div id="s2" class="hidden"><div style="font-size:30px;color:#00ff88">✓</div><h2>Verified Successfully</h2><p style="color:#888">Your code confirmed.</p><button class="btn-gold" style="margin-top:15px;width:100%" onclick="document.getElementById('otp').classList.add('hidden')">Go to Dashboard</button></div>
+</div>
+</div>
+
+<script>
+let s=34;setInterval(()=>{if(s>0){s--;document.getElementById('timer').textContent='Resend 00:'+String(s).padStart(2,'0')}},1000)
+document.querySelectorAll('.otp').forEach((a,i,all)=>{a.addEventListener('input',()=>{if(a.value&&i<3)all[i+1].focus();if([...all].every(x=>x.value)){document.getElementById('btnV').textContent='Verifying Code...';setTimeout(()=>{document.getElementById('s1').classList.add('hidden');document.getElementById('s2').classList.remove('hidden')},1500)}})})
+document.getElementById('file').addEventListener('change',e=>{document.getElementById('pic').src=URL.createObjectURL(e.target.files[0])})
+let end=Date.now()+30*24*3600*1000;setInterval(()=>{let d=end-Date.now();let day=Math.floor(d/86400000);let h=Math.floor((d%86400000)/3600000);let m=Math.floor((d%3600000)/60000);let sec=Math.floor((d%60000)/1000);document.getElementById('count').textContent=day+'d '+h+':'+m+':'+sec},1000)
+</script>
+</body>
+</html>
